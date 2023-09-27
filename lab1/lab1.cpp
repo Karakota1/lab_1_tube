@@ -111,7 +111,7 @@ void CSChange(CS& cs) {
 		ViewCSs(cs);
 		cout << "\n\tВыберете Цех для редактирования: ";
 		cin >> w;
-		if (cs.WS.size() > w) {
+		if (cs.WS.size() < w) {
 			cout << "\n\nOut of range\n\n";
 		}
 		else {
@@ -148,7 +148,12 @@ void SaveCSsData(CS& cs) {
 		system("cls");
 		cout << "Ошибка чтения файла!";
 	}
-	file << cs.name << " " << cs.wrkshopsCount << endl;
+	if (cs.wrkshopsCount > 0) {
+		file << cs.name << " " << cs.wrkshopsCount << endl;
+	}
+	else {
+		file << "КС" << " " << 0 << endl;
+	}
 	file.close();
 
 	file.open("WS.txt", fstream::in | ofstream::out);
@@ -181,44 +186,21 @@ void SaveData(Pipe pipe,CS cs) {
 	SaveCSsData(cs);
 }
 
-void LoadDataCS() {
-	/*ifstream Ws("C:/repo/lab_1_tube/saved_CSs/WS.txt");
-	std::string line;
-	std::string lineWs;
-	int i=0;
-	if(Ws.is_open()){
-		while (std::getline(Ws, lineWs)) {//Заходит на линию и через for разбивает эту линию на отдельные элементы
-			vector <bool> WSS;
-			for (int j; j < lineWs.size(); j++) {//Добавление цехов, а точнее булевого вектора, содержащего состояние
-				if (lineWs[j] == 1) {
-					WSS.push_back(true);
-				}
-				else if (lineWs[j] == 2) {
-					WSS.push_back(false);
-				}
-			}
-			CSs[i].WS = WSS;
-			i++;
-		}
+void LoadDataPipe(Pipe& pipe) {
+	ifstream file("pipes.txt");
+	if (file.is_open()) {
+		getline(file, pipe.name);
+		file >> pipe.length;
+		file >> pipe.diameter;
+		file >> pipe.isWorking;
 	}
 	else {
-		cout << "\nОшибка чтения\n";
+		cout << "\n\nОшибка загрузки файла pipes.txt\n\n";
 	}
-	Ws.close();
-
-	ifstream file("C:/repo/lab_1_tube/saved_CSs/CSs.txt");
-	if (!file.is_open()) {
-		cout << "Ошибка чтения";
-	}else {
-		while (std::getline(file, line)) {//Добавление названия и кол-ва цехов
-			CSs[i].name = line[0];
-			CSs[i].wrkshopsCount = line[1];
-		}
-	}
-	file.close();*/
+	file.close();
 }
 
-void LoadDataPipe() {
+void LoadDataCS() {
 
 }
 
