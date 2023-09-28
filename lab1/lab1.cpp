@@ -188,8 +188,10 @@ void SaveData(Pipe pipe,CS cs) {
 
 void LoadDataPipe(Pipe& pipe) {
 	ifstream file("pipes.txt");
+	char Pname[30];
 	if (file.is_open()) {
-		getline(file, pipe.name);
+		file >> Pname;//Эта штука изобретена укропами, взята буквально с боем, вы можете себе представить лицо человека, который придумал Ansi
+		pipe.name = Pname;
 		file >> pipe.length;
 		file >> pipe.diameter;
 		file >> pipe.isWorking;
@@ -201,7 +203,16 @@ void LoadDataPipe(Pipe& pipe) {
 }
 
 void LoadDataCS() {
+	ifstream file("CS.text");
+	if (file.is_open()) {
+		file >> 
+	}
+	else {
+		cout << "\n\nОшибка загрузки файл CS.text\n\n";
+	}
 
+
+	file.close();
 }
 
 int main()
@@ -243,6 +254,7 @@ int main()
 			break;
 		case 7:
 			//LoadDataCS();
+			LoadDataPipe(pipe);
 			break;
 		case 0:
 			exit(0);
