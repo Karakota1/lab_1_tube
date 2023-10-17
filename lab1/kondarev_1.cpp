@@ -87,8 +87,8 @@ void AddCS(CS& cs) {
 	for (int j = 0; j < count; j++) {
 		cs.WS.push_back(true);
 	}
-	cout << "Введите эффективность(1,100):\n\n";
-	float effic = InputNum(1,100);
+	cout << "Введите эффективность(0,100):\n\n";
+	float effic = InputNum(0,100);
 	cs.efficiency = effic;
 	cs.wrkshopsCount = count;
 }
@@ -110,7 +110,7 @@ void ViewCSs(const CS& cs) {
 void PipeChange(Pipe& pipe) {
 	cout << "Состояние:\n1.Работает\n2.Требуется ремонт\n";
 	int n = Choose(1,2);
-	if (n == 2)
+	if (n == 1)
 		pipe.inRepare = true;
 	else
 		pipe.inRepare = false;
